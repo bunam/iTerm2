@@ -4178,17 +4178,21 @@ static double EuclideanDistance(NSPoint p1, NSPoint p2) {
 {
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
     NSString *copyString;
-
+    
     DLog(@"-[PTYTextView copy:] called");
     copyString = [self selectedText];
+    
     DLog(@"Have selected text of length %d. startX=%d, startY=%d, endX=%d, endY=%d", (int)[copyString length], startX, startY, endX, endY);
-    if (copyString) {
+    
+    if ( [copyString length] && ![copyString isEqual: @"\n"] ){
         [pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
         [pboard setString:copyString forType:NSStringPboardType];
+        
+        [[PasteboardHistory sharedInstance] save:copyString];
     }
-
-    [[PasteboardHistory sharedInstance] save:copyString];
+    
 }
+    
 
 - (void)paste:(id)sender
 {

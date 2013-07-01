@@ -1019,7 +1019,7 @@ static BOOL initDone = NO;
 
     // Where do we execute this command?
     BOOL toggle = NO;
-    if (theTerm == nil) {
+ /*   if (theTerm == nil) { */
         [iTermController switchToSpaceInBookmark:aDict];
         term = [[[PseudoTerminal alloc] initWithSmartLayout:YES
                                                  windowType:[self _windowTypeForBookmark:aDict]
@@ -1030,9 +1030,9 @@ static BOOL initDone = NO;
         [self addInTerminals:term];
         toggle = (([term windowType] == WINDOW_TYPE_FULL_SCREEN) ||
                   ([term windowType] == WINDOW_TYPE_LION_FULL_SCREEN));
-    } else {
+ /*    } else {
         term = theTerm;
-    }
+    } */
 
     id result = [term addNewSession:aDict
                         withCommand:command
